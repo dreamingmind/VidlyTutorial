@@ -21,7 +21,10 @@ router.get('/:controller/:id', (req, res) => {
     let controller = this.getController(req.params.controller);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
 
-    return res.send(controller.index());
+    let result = controller.view(req.params.id);
+    if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
+
+    return res.status(200).send(result);
 })
 
 router.post('/:controller', (req, res) => {
