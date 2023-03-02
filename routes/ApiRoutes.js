@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const inflector = require("../utility/Inflect");
 
-this.getController = function (controller) {
+this.getController = function (controller, req, res) {
     try {
         let className = '../controllers/' + inflector.capitalize(controller) + 'Controller';
         return require(className);
