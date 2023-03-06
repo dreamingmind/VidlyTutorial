@@ -28,10 +28,16 @@ router.get('/:controller/:id', (req, res) => {
 })
 
 router.post('/:controller', (req, res) => {
-    return res.send('Hello World');
+    let controller = this.getController(req.params.controller);
+    if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
+
+    let result = controller.add(req.body);
+    if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
+
+    return res.status(200).send(result);
 })
 
-router.put('/:controller/:id', (req, res) => {
+router.patch('/:controller/:id', (req, res) => {
     return res.send('Hello World');
 })
 

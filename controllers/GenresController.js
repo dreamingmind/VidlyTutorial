@@ -1,18 +1,15 @@
 class GenresController
 {
-    static data = [
+    data = [
         {id: 1, name: 'SciFi'},
         {id: 2, name: 'Mystery'},
     ]
 
-
-    construct(req, res) {
-        this.req = req;
-        this.res = res;
-    }
-
+    /**
+     * @returns {[{name: string, id: number},{name: string, id: number}]}
+     */
     index() {
-        return GenresController.data;
+        return this.data;
     }
 
     /**
@@ -23,9 +20,15 @@ class GenresController
         return this.findById(id);
     }
 
-    edit(id) {
-        let index = this.findIndexOf(id);
-        if (!index) return false;
+    add(data) {
+        let genre = {
+            "name": data.name,
+            "id": this.getNewId()
+        }
+        this.data.push(genre);
+        return genre;
+        // let index = this.findIndexOf(id);
+        // if (!index) return false;
         /**
          * We need the request in here to do the edit.
          * The best approach is probably to send it as a constructor arg.
@@ -41,18 +44,22 @@ class GenresController
     }
 
     findById(id) {
-        return GenresController.data.find(
+        return this.data.find(
             (value, index, collection) => {
                 if (value.id === +id) return value;
             })
     }
     
     findIndexOf(id) {
-        return GenresController.data.find(
+        return this.data.find(
             (value,index,obj) => {
                 if (value.id === +id) return index;
             }
         )
+    }
+
+    getNewId() {
+        return this.data[this.data.length - 1].id + 1;
     }
 }
 
