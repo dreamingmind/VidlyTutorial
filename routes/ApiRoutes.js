@@ -27,9 +27,16 @@ router.get('/:controller/:id', (req, res) => {
     return res.status(200).send(result);
 })
 
+function contentIsJson(req) {
+    return req.header('content-type') === 'application/json'
+        && req.body instanceof Object;
+}
+
 router.post('/:controller', (req, res) => {
     let controller = this.getController(req.params.controller);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
+    if(!contentIsJson(req)) return res.status(400).send("Request body must be 'application/json");
+
     //@todo This should be aware of 'validation' and other errors from the backend
 
     let result = controller.add(req.body);
