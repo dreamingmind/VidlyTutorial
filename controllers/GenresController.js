@@ -20,6 +20,12 @@ class GenresController
         return this.findById(id);
     }
 
+    /**
+     * @todo This should validate 'data' in a 'Table'?
+     *
+     * @param {{name}} data
+     * @returns {{name, id: *}}
+     */
     add(data) {
         let genre = {
             "name": data.name,
@@ -58,6 +64,11 @@ class GenresController
         )
     }
 
+    /**
+     * @todo This should be abstracted to a 'Table'?
+     *
+     * @returns {*}
+     */
     getNewId() {
         return this.data[this.data.length - 1].id + 1;
     }

@@ -30,6 +30,7 @@ router.get('/:controller/:id', (req, res) => {
 router.post('/:controller', (req, res) => {
     let controller = this.getController(req.params.controller);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
+    //@todo This should be aware of 'validation' and other errors from the backend
 
     let result = controller.add(req.body);
     if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
