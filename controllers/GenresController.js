@@ -40,6 +40,13 @@ class GenresController
             "name": data.name,
             "id": this.getNewId()
         }
+
+        let { error } = this.schema.validate(genre);
+        if(error) return {
+            error: error.message,
+            post_data: data
+        };
+
         this.data.push(genre);
         return genre;
         // let index = this.findIndexOf(id);
