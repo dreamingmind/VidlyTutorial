@@ -5,6 +5,15 @@ class GenresController
         {id: 2, name: 'Mystery'},
     ]
 
+    Joi = require('joi');
+
+    schema = this.Joi.object({
+        name: this.Joi.string()
+            .pattern(/^[a-zA-Z_ -]{3,100}$/)
+            .required(),
+        id: this.Joi.number()
+    })
+
     /**
      * @returns {[{name: string, id: number},{name: string, id: number}]}
      */
