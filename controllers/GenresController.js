@@ -53,7 +53,7 @@ class GenresController
     edit(id, data) {
         let genre = this.findById(id);
         genre.name = data.name;
-        
+
         let { error } = this.schema.validate(genre);
         if(error) return {
             error: error.message,
