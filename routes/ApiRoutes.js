@@ -31,7 +31,7 @@ function edit(req, res) {
  * index
  */
 router.get('/:controller', (req, res) => {
-    let controller = this.getController(req.params.controller);
+    let controller = getController(req.params.controller);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
 
     return res.send(controller.index());
@@ -41,7 +41,7 @@ router.get('/:controller', (req, res) => {
  * view
  */
 router.get('/:controller/:id', (req, res) => {
-    let controller = this.getController(req.params.controller);
+    let controller = getController(req.params.controller);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
 
     let result = controller.view(req.params.id);
@@ -54,7 +54,7 @@ router.get('/:controller/:id', (req, res) => {
  * add
  */
 router.post('/:controller', (req, res) => {
-    let controller = this.getController(req.params.controller);
+    let controller = getController(req.params.controller);
     if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
     if(!contentIsJson(req)) return res.status(400).send("Request body must be 'application/json");
 
