@@ -63,6 +63,17 @@ class GenresController
         return genre;
     }
 
+    delete(id) {
+        let index = this.findIndexOf(id);
+        if (!index) {return false}
+
+        let genre = {};
+        genre = Object.assign(genre, this.data[index]);
+
+        this.data.splice(index, 1);
+        return genre;
+    }
+
     findById(id) {
         return this.data.find(
             (value, index, collection) => {
