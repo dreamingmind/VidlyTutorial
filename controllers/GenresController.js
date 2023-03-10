@@ -66,14 +66,14 @@ class GenresController
     findById(id) {
         return this.data.find(
             (value, index, collection) => {
-                if (value.id === +id) return value;
+                return value.id === +id;
             })
     }
     
     findIndexOf(id) {
-        return this.data.find(
+        return this.data.findIndex(
             (value,index,obj) => {
-                if (value.id === +id) return index;
+                return value.id === +id;
             }
         )
     }
