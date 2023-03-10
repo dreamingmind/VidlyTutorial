@@ -77,7 +77,13 @@ router.put('/:controller/:id', edit)
  * delete
  */
 router.delete('/:controller/:id', (req, res) => {
-    return res.send('Hello World');
+    let controller = getController(req.params.controller);
+    if(!controller) return res.status(404).send(`${req.params.controller} could not be found`);
+
+    let result = controller.delete(req.params.id);
+    if (!result) return res.status(404).send(`The requested ${req.params.controller} could not be found`);
+
+    return res.status(200).send(result);
 })
 
 module.exports = router;
